@@ -1,0 +1,44 @@
+.navbar{
+    background:#314869;
+    display:flex;
+    justify-content: center;
+    justify-items: center;
+    list-style-type: none;
+  
+}
+.listElemt:hover{
+   color:white;
+
+}
+.link{
+    color: rgb(196, 202, 202);
+    text-decoration: none;
+    vertical-align: middle;
+    margin:8px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    /* padding:40px; */
+
+}
+#heading{
+    color:white;
+    text-transform: uppercase;
+    font-size: large;
+    font-weight: 700;
+    padding:10px;
+    letter-spacing: 3px;
+}
+/* .link:hover{
+    color:white;
+} */
+.studentsList{
+    list-style-type: none;
+    background: pink;
+    margin-top:-16px;
+}
+.add-mentors{
+  /* background-color: aqua; */
+  padding:10px;
+  border:2px solid #314869;
+}
+

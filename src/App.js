@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Navbar from "./components/Navbar.js";
+import { Route, Switch } from "react-router-dom";
+import CreateMentor from "./components/CreateMentor.js";
+import Mentors from "./components/Mentors";
+import CreateStudent from "./components/CreateStudent"
+import Students from "./components/Students";
+import FindByMentor from "./components/FindByMentor.js";
+import ChangeMentor from "./components/changeMentor.js";
+import AssignMentors from "./components/AssignMentors.js";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Switch>
+        <Route exact path="/">
+          Welcome home
+        </Route>
+        <Route exact path="/students">
+          <Students />
+        </Route>
+        <Route exact path="/mentors">
+          <Mentors />
+        </Route>
+        <Route path="/add-mentor">
+               <CreateMentor />
+           </Route>
+           <Route path="/add-student">
+               <CreateStudent />
+           </Route>
+           <Route path="/assign-mentor">
+               <AssignMentors />
+           </Route>
+           <Route path="/change-mentor">
+               <ChangeMentor />
+           </Route>
+           <Route path="/find-by-mentor">
+               <FindByMentor />
+           </Route>
+      </Switch>
     </div>
   );
 }
