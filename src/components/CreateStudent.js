@@ -17,6 +17,7 @@ export default function CreateStudent({getMentors}) {
             password:password,
             mentorId:mentorId
         }
+          // function to add new student to API through POST method
          fetch("https://student-mentor-assign-server.herokuapp.com/students",{
             method: "POST",
             headers:{
@@ -33,13 +34,14 @@ export default function CreateStudent({getMentors}) {
        
         <div className="add-mentors">
             
-           <ArrowBackIcon   onClick={()=>history.goBack()}/>
-      <TextField onInput={(e)=>setName(e.target.value)}id="outlined-basic" label="Enter Name" variant="outlined" />
-      <TextField onInput={(e)=>setSurname(e.target.value)}id="outlined-basic" label="Enter surName" variant="outlined" />
-      <TextField onInput={(e)=>setEmail(e.target.value)}id="outlined-basic" label="Enter Email" variant="outlined" />
-      <TextField onInput={(e)=>setPassword(e.target.value)}id="outlined-basic" label="Enter Password" variant="outlined" />
-      <TextField onInput={(e)=>setMentorID(e.target.value)}id="outlined-basic" label="Enter Mentor-Id" variant="outlined" />
-      <Button variant="contained" color="secondary" onClick={handleSubmit}>Submit</Button>
+          
+         <p>  <ArrowBackIcon className="addForm"   onClick={()=>history.goBack()}/></p>
+     <p> <TextField className="addForm" onInput={(e)=>setName(e.target.value)}id="outlined-basic" label="Enter Name" variant="outlined" /></p>
+    <p>  <TextField className="addForm"onInput={(e)=>setSurname(e.target.value)}id="outlined-basic" label="Enter surName" variant="outlined" /></p>
+     <p> <TextField className="addForm" onInput={(e)=>setEmail(e.target.value)}id="outlined-basic" label="Enter Email" variant="outlined" /></p>
+     <p> <TextField className="addForm"onInput={(e)=>setPassword(e.target.value)}id="outlined-basic" label="Enter Password" variant="outlined" /></p>
+     <p> <TextField className="addForm"  onInput={(e)=>setMentorID(e.target.value)}id="outlined-basic" label="Enter Mentor-Id" variant="outlined" /></p>
+    <p>  <Button className="addForm" variant="contained" color="secondary" onClick={handleSubmit}>Submit</Button></p>
         </div>
     )
 }

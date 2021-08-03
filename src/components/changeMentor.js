@@ -52,6 +52,7 @@ export default function ChangeMentor() {
           id:studentId,
           mentorId:mentorId
       }
+        // function to change mentor for a student in API through PATCH method
        const req=await fetch("https://student-mentor-assign-server.herokuapp.com/students/change-mentor",
        {
            method:"PATCH",
@@ -96,7 +97,7 @@ export default function ChangeMentor() {
               ))}
             </Select>
           </FormControl>
-          <Button onClick={changeMentor}variant="contained" color="primary">Change Mentor</Button>
+          <Button id="changeMentor" onClick={changeMentor}variant="contained" color="primary">Change Mentor</Button>
         </div>
     )
 }

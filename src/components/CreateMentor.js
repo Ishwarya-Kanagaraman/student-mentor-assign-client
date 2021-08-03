@@ -13,6 +13,7 @@ export default function CreateMentor({getMentors}) {
             email:email,
             mentorId:mentorId
         }
+        // function to add new mentor to API through POST method
          fetch("https://student-mentor-assign-server.herokuapp.com/mentors",{
             method: "POST",
             headers:{
@@ -29,25 +30,15 @@ export default function CreateMentor({getMentors}) {
        
         <div className="add-mentors">
             
-           <ArrowBackIcon   onClick={()=>history.goBack()}/>
-      <TextField onInput={(e)=>setName(e.target.value)}id="outlined-basic" label="Enter Name" variant="outlined" />
-      <TextField onInput={(e)=>setEmail(e.target.value)}id="outlined-basic" label="Enter Email" variant="outlined" />
-      <TextField onInput={(e)=>setMentorID(e.target.value)}id="outlined-basic" label="Enter Mentor-Id" variant="outlined" />
-      <Button variant="contained" color="secondary" onClick={handleSubmit}>Submit</Button>
-       {/* <form className="myForm"onSubmit={handleSubmit(handleSubmit)}>
-      <input {...register("name")} placeholder="Enter name of Mentor" />
-      {errors.name && (
-        <span style={{ color: "crimson" }}> {errors.name.message} </span>
-      )}
-      <input {...register("email")} placeholder="Enter email-Id" />
-      {errors.avatar && (
-        <span style={{ color: "crimson" }}> {errors.email.message} </span>
-      )}
-  
-      <br />
-
-      <input type="submit" />
-    </form> */}
+         
+     <p> <ArrowBackIcon  className="addForm" onClick={()=>history.goBack()}/></p>
+     <p><TextField  className="addForm"  onInput={(e)=>setName(e.target.value)}id="outlined-basic" label="Enter Name" variant="outlined" /></p>
+     <p> <TextField  className="addForm" onInput={(e)=>setEmail(e.target.value)}id="outlined-basic" label="Enter Email" variant="outlined" /></p> 
+     <p> <TextField  className="addForm" onInput={(e)=>setMentorID(e.target.value)}id="outlined-basic" label="Enter Mentor-Id" variant="outlined" /></p>
+     <p> <Button  className="addForm" variant="contained" color="secondary" onClick={handleSubmit}>Submit</Button></p>
+     
+     
+    
         </div>
     )
 }

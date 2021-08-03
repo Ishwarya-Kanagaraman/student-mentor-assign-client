@@ -8,7 +8,7 @@ export default function Students() {
     function getStudents() {
      
     
-        // fetch("https://609e2a6033eed80017957df0.mockapi.io/usersList", {
+      // function to get all students using get method
             fetch("https://student-mentor-assign-server.herokuapp.com/students",{
           method: "GET",
         })

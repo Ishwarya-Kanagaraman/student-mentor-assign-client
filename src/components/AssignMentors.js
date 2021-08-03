@@ -7,21 +7,25 @@ import Checkbox from "@material-ui/core/Checkbox";
 export default function AssignMentors() {
   const [students, setStudents] = useState([]);
   const [mentors, setMentors] = useState([]);
+  
   function getStudents() {
     // fetch("https://609e2a6033eed80017957df0.mockapi.io/usersList", {
     fetch("https://student-mentor-assign-server.herokuapp.com/students", {
       method: "GET",
     })
       .then((res) => res.json())
+      .then(res=>res.filter(e=>!e.mentorId))
       .then((res) => setStudents(res))
+      // .then(res=>setBatch(res))
       .then((res) => console.log(res));
+      
   }
+  // console.log("batch " ,batch)
   useEffect(() => {
     getStudents();
   }, []);
 
   function getMentors() {
-    // fetch("https://609e2a6033eed80017957df0.mockapi.io/usersList", {
     fetch("https://student-mentor-assign-server.herokuapp.com/mentors", {
       method: "GET",
     })
@@ -32,51 +36,58 @@ export default function AssignMentors() {
   useEffect(() => {
     getMentors();
   }, []);
-  //   const [Selectedstudents,setSelectedStudents]=useState([]);
   const [mentorId, setMentorId] = useState("");
   const[studentId,setStudentId]=useState('')
-  const filter = [];
+  // const filter = [];
+ 
   const handleChange = (event) => {
     setMentorId(event.target.value);
     console.log(event.target.value);
   };
   const handleCheck = (e) => {
-    const target = e.target;
-    if (target.checked) {
-      console.log(target.value);
-      setStudentId(target.value)
-      console.log("Student id is ",studentId)
-      filter.push(target.value);
-      console.log("filter Array ",filter,filter.length);
+ e.preventDefault();
+    if (e.target.checked) {
+      setStudentId(e.target.value)
+      console.log(e.target.value)
+      
     }
   };
-  const assignStudents = async () => {
+  
+ 
+  const assignStudents = async (e) => {
+    e.preventDefault();
     // if (filter.length <1) {
     //   alert("select atleast one student");
     // }
       if (mentorId === "") {
       alert("please select a mentor");
     }
+    else if(studentId===""){
+      alert("please select student")
+    }
      else {
-        
+        const data={
+          id:studentId,
+          mentorId: mentorId,
+        };
+        console.log("data is ",data)
+          // function to assign mentor to student API through POST method
             const request = await fetch(
-                "https://student-mentor-assign-server.herokuapp.com/students/assign-mentor",
+                `https://student-mentor-assign-server.herokuapp.com/students/assign-mentor`,
                 {
                   method: "POST",
                   headers: {
-                    ContentType: "application/json",
+                    "Content-Type": "application/json",
                   },
-                  body: JSON.stringify({
-                    id:studentId,
-                    mentorId: mentorId,
-                  }),
+                  body: JSON.stringify(data),
                 }
               );
               if (!(request.status === 200)) {
                 window.alert("assigning Failed..!");
               } else {
-                window.alert("Students assigned successfully!");
+                window.alert("Mentor assigned successfully!");
               }
+            setStudents(students.filter(e=>!e.mentorId));
     }
   };
 
@@ -84,8 +95,12 @@ export default function AssignMentors() {
     <>
       <div className="mentor-student-assign">
         <div className="students">
-          {students.map((e) => (
-            <p>
+          <div className="row">
+            <div className="col-md-3 col-sm-12"></div>
+            <div className="col-md-6 col-sm-12">
+            <h4>Students :</h4>
+          {students.map((e,idx) => (
+            <p key={idx}>
               <FormControlLabel
                 onChange={handleCheck}
                 value={e._id}
@@ -105,16 +120,20 @@ export default function AssignMentors() {
               value={mentorId}
               onChange={handleChange}
             >
-              {mentors.map((e) => (
-                <MenuItem value={e.mentorId}>{e.name}</MenuItem>
+              {mentors.map((e,index) => (
+                <MenuItem key={index}value={e.mentorId}>{e.name}</MenuItem>
               ))}
             </Select>
           </FormControl>
         </div>
       </div>
-      <Button onClick={assignStudents} variant="outlined" color="secondary">
+      <Button id="assignButton" onClick={assignStudents} variant="outlined" color="secondary">
         Assign
       </Button>
+            </div>
+            <div className="col-md-3 col-sm-12"></div>
+          </div>
+          
     </>
   );
 }
